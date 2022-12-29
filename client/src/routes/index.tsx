@@ -1,16 +1,18 @@
 import { Routes, Route } from 'react-router-dom'
 
 import Todo from './Todo'
+import SignIn from './SignIn'
+import SignUp from './SignUp'
 
 const App = () => {
   return (
-    <div>
-      <main>
-        <Routes>
-          <Route path='/' element={<Todo />} />
-        </Routes>
-      </main>
-    </div>
+    <main>
+      <Routes>
+        <Route path='/' element={<Todo />} />
+        <Route path='/sign-in' element={<SignIn />} />
+        <Route path='/sign-up' element={<SignUp />} />
+      </Routes>
+    </main>
   )
 }
 
