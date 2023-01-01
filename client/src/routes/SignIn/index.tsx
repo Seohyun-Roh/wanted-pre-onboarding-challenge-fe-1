@@ -1,5 +1,75 @@
+import axios from 'axios'
+import { FormEventHandler, useState, useEffect, useMemo } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+import { validateEmail } from 'utils/validate'
+
+import styles from './signIn.module.scss'
+
 const SignIn = () => {
-  return <div>SignIn</div>
+  const navigate = useNavigate()
+
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [isDisabled, setIsDisabled] = useState(true)
+
+  const isValidEmail = useMemo(() => validateEmail(email), [email])
+
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      navigate('/')
+    }
+  }, [navigate])
+
+  useEffect(() => {
+    if (isValidEmail && password.length >= 8) {
+      setIsDisabled(false)
+    } else {
+      setIsDisabled(true)
+    }
+  }, [email, isValidEmail, password.length])
+
+  const handleSubmit: FormEventHandler = (e) => {
+    e.preventDefault()
+
+    axios
+      .post('http://localhost:8080/users/login', {
+        email,
+        password,
+      })
+      .then(({ data }) => {
+        localStorage.setItem('token', data.token)
+        navigate('/')
+      })
+      .catch(({ response }) => {
+        // eslint-disable-next-line no-alert
+        alert(response.data.details)
+      })
+  }
+
+  return (
+    <main className={styles.pageContainer}>
+      <h1>Hey, Hello!</h1>
+      <form onSubmit={handleSubmit}>
+        <div className={styles.inputBox}>
+          <label htmlFor='email-input'>Email</label>
+          <input type='email' name='email-input' value={email} onChange={(e) => setEmail(e.currentTarget.value)} />
+        </div>
+        <div className={styles.inputBox}>
+          <label htmlFor='password-input'>Password</label>
+          <input
+            type='password'
+            name='password-input'
+            value={password}
+            onChange={(e) => setPassword(e.currentTarget.value)}
+          />
+        </div>
+        <button type='submit' disabled={isDisabled} className={styles.submitButton}>
+          Sign In
+        </button>
+      </form>
+    </main>
+  )
 }
 
 export default SignIn

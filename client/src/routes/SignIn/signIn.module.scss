@@ -1,0 +1,56 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/mixins/flexbox';
+
+.pageContainer {
+  @include flexbox.flexbox(center, center);
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+  max-width: 768px;
+  height: 100vh;
+  padding: 30px;
+  background-color: colors.$WHITE;
+
+  h1 {
+    margin-bottom: 40px;
+    font-size: 32px;
+    font-weight: 600;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .inputBox {
+      @include flexbox.flexbox(start, center);
+      padding: 5px;
+      margin-bottom: 15px;
+      border-bottom: 1px solid colors.$GRAYA;
+
+      label {
+        margin-right: 10px;
+      }
+
+      input {
+        width: 100%;
+      }
+    }
+
+    .submitButton {
+      padding: 10px;
+      font-size: 18px;
+      color: colors.$WHITE;
+      background-color: colors.$BLUE;
+      border: 1px solid colors.$BLUE;
+      border-radius: 10px;
+      transition: all 300ms;
+
+      &:disabled {
+        color: colors.$GRAY2;
+        background-color: colors.$WHITE;
+        border: 1px solid colors.$GRAYA;
+      }
+    }
+  }
+}
