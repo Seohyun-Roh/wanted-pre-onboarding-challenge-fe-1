@@ -46,24 +46,29 @@ const SignUp = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className={styles.container}>
-      <div>
-        <label htmlFor='email-input'>이메일</label>
-        <input type='email' name='email-input' value={email} onChange={(e) => setEmail(e.currentTarget.value)} />
-        {!isValidEmail && <span>유효한 이메일을 입력해주세요.</span>}
+    <form onSubmit={handleSubmit} className={styles.formContainer}>
+      <h1>Create an account</h1>
+      <div style={{ width: '100%' }}>
+        <div className={styles.inputBox}>
+          <label htmlFor='email-input'>Email</label>
+          <input type='email' name='email-input' value={email} onChange={(e) => setEmail(e.currentTarget.value)} />
+        </div>
+        <p className={styles.inputMessage}>{!isValidEmail && 'Please enter a valid email.'}</p>
+        <div className={styles.inputBox}>
+          <label htmlFor='password-input'>Password</label>
+          <input
+            type='password'
+            name='password-input'
+            value={password}
+            onChange={(e) => setPassword(e.currentTarget.value)}
+          />
+        </div>
+        <p className={styles.inputMessage}>
+          {password.length < 8 && 'Please enter at least 8 characters of password.'}
+        </p>
       </div>
-      <div>
-        <label htmlFor='password-input'>비밀번호</label>
-        <input
-          type='password'
-          name='password-input'
-          value={password}
-          onChange={(e) => setPassword(e.currentTarget.value)}
-        />
-        {password.length < 8 && <span>비밀번호를 8자 이상 입력해주세요.</span>}
-      </div>
-      <button type='submit' disabled={isDisabled}>
-        회원가입
+      <button type='submit' disabled={isDisabled} className={styles.submitButton}>
+        Create account
       </button>
     </form>
   )
