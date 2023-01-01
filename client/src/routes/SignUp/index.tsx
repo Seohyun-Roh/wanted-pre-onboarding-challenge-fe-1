@@ -46,9 +46,9 @@ const SignUp = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className={styles.formContainer}>
+    <main className={styles.pageContainer}>
       <h1>Create an account</h1>
-      <div style={{ width: '100%' }}>
+      <form onSubmit={handleSubmit}>
         <div className={styles.inputBox}>
           <label htmlFor='email-input'>Email</label>
           <input type='email' name='email-input' value={email} onChange={(e) => setEmail(e.currentTarget.value)} />
@@ -66,11 +66,11 @@ const SignUp = () => {
         <p className={styles.inputMessage}>
           {password.length < 8 && 'Please enter at least 8 characters of password.'}
         </p>
-      </div>
-      <button type='submit' disabled={isDisabled} className={styles.submitButton}>
-        Create account
-      </button>
-    </form>
+        <button type='submit' disabled={isDisabled} className={styles.submitButton}>
+          Create account
+        </button>
+      </form>
+    </main>
   )
 }
 
