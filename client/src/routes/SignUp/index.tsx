@@ -2,6 +2,7 @@ import axios from 'axios'
 import { useMemo, useEffect, FormEventHandler, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { SERVER_URL } from 'constants/todo'
 import { validateEmail } from 'utils/validate'
 
 import styles from './signUp.module.scss'
@@ -27,7 +28,7 @@ const SignUp = () => {
     e.preventDefault()
 
     axios
-      .post('http://localhost:8080/users/create', {
+      .post(`${SERVER_URL}/users/create`, {
         email,
         password,
       })
