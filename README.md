@@ -1,5 +1,56 @@
 # wanted-pre-onboarding-challenge-fe-1
 
+## Preview
+
+### SignUp
+
+![signup](https://user-images.githubusercontent.com/76952602/211880478-357ed35a-ba81-4cc9-93f1-ee48677259b4.png)
+
+### SignIn
+
+![signin](https://user-images.githubusercontent.com/76952602/211880700-35092dc3-e7b2-4729-8e72-9066c8f4f643.png)
+
+### Todo
+
+## 프로젝트 실행
+
+- 프로젝트 설치
+
+```bash
+git clone https://github.com/Seohyun-Roh/wanted-pre-onboarding-challenge-fe-1.git
+```
+
+- 클라이언트 실행
+
+```bash
+cd client
+
+yarn install
+
+yarn start
+```
+
+- 서버 실행
+
+```bash
+cd server
+
+yarn install
+
+yarn start
+```
+
+## 사용 기술
+
+`React`, `TypeScript`, `scss`, `axios`  
+`ESLint`, `Prettier`, `Stylelint`
+
+## 폴더 구조
+
+```bash
+
+```
+
 ## Assignment 1 - Login / SignUp
 
 - /auth 경로에 로그인 / 회원가입 기능을 개발합니다
@@ -26,5 +77,4 @@
   - [ ] 새로고침을 했을 때 현재 상태가 유지되어야 합니다.
   - [ ] 개별 Todo를 조회 순서에 따라 페이지 뒤로가기를 통하여 조회할 수 있도록 해주세요.
 - 한 페이지 내에서 새로고침 없이 데이터가 정합성을 갖추도록 구현해주세요
-
   - [ ] 수정되는 Todo의 내용이 목록에서도 실시간으로 반영되어야 합니다
