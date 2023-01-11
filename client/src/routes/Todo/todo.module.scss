@@ -1,0 +1,19 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/mixins/flexbox';
+
+.pageContainer {
+  @include flexbox.flexbox(start, center);
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+  max-width: 768px;
+  height: 100vh;
+  padding: 30px;
+  background-color: colors.$WHITE;
+
+  h1 {
+    margin-bottom: 40px;
+    font-size: 32px;
+    font-weight: 600;
+  }
+}

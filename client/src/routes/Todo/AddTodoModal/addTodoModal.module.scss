@@ -1,0 +1,50 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/mixins/flexbox';
+
+.addTodoForm {
+  @include flexbox.flexbox(center, center);
+  flex-direction: column;
+  height: 100%;
+  font-size: 18px;
+
+  h2 {
+    margin-bottom: 40px;
+    font-size: 28px;
+    font-weight: 600;
+  }
+
+  .inputContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 20px;
+
+    label {
+      padding-left: 5px;
+      margin-bottom: 10px;
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px 15px;
+      background-color: rgba(colors.$BLUE, 0.05);
+      border-radius: 6px;
+    }
+  }
+
+  .submitButton {
+    padding: 10px 15px;
+    font-size: 18px;
+    color: colors.$WHITE;
+    background-color: colors.$BLUE;
+    border: 1px solid colors.$BLUE;
+    border-radius: 6px;
+    transition: background-color 300ms;
+
+    &:hover {
+      background-color: rgba(colors.$BLUE, 0.8);
+    }
+  }
+}

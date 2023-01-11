@@ -33,7 +33,7 @@ export const Modal = ({ isModalOpen, setIsModalOpen, children }: Props) => {
         <button type='button' onClick={handleCloseClick} className={styles.closeButton}>
           <Close />
         </button>
-        <div>{children}</div>
+        {children}
       </div>
     </div>
   )
