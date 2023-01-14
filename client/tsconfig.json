@@ -12,6 +12,6 @@
     "noImplicitAny": true,
     "strictNullChecks": true
   },
-  "include": ["src"],
+  "include": ["src", ".d.ts"],
   "exclude": ["./node_modules"]
 }
