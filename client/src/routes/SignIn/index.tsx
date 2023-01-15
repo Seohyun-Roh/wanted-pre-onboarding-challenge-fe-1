@@ -12,7 +12,7 @@ const SignIn = () => {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [isDisabled, setIsDisabled] = useState(true)
+  const [isValidInfo, setIsValidInfo] = useState(false)
 
   const isValidEmail = useMemo(() => validateEmail(email), [email])
 
@@ -23,11 +23,7 @@ const SignIn = () => {
   }, [navigate])
 
   useEffect(() => {
-    if (isValidEmail && password.length >= 8) {
-      setIsDisabled(false)
-    } else {
-      setIsDisabled(true)
-    }
+    setIsValidInfo(isValidEmail && password.length >= 8)
   }, [email, isValidEmail, password.length])
 
   const handleSubmit: FormEventHandler = (e) => {
@@ -65,7 +61,7 @@ const SignIn = () => {
             onChange={(e) => setPassword(e.currentTarget.value)}
           />
         </div>
-        <button type='submit' disabled={isDisabled} className={styles.submitButton}>
+        <button type='submit' disabled={!isValidInfo} className={styles.submitButton}>
           Sign In
         </button>
       </form>

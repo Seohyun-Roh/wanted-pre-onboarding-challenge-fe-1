@@ -4,5 +4,6 @@
 .container {
   @include flexbox.flexbox(center, start);
   min-height: 100vh;
+  color: colors.$GRAY2;
   background-color: colors.$BG_COLOR;
 }

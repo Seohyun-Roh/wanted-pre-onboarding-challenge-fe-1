@@ -12,16 +12,12 @@ const SignUp = () => {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [isDisabled, setIsDisabled] = useState(true)
+  const [isValidInfo, setIsValidInfo] = useState(false)
 
   const isValidEmail = useMemo(() => validateEmail(email), [email])
 
   useEffect(() => {
-    if (isValidEmail && password.length >= 8) {
-      setIsDisabled(false)
-    } else {
-      setIsDisabled(true)
-    }
+    setIsValidInfo(isValidEmail && password.length >= 8)
   }, [email, isValidEmail, password.length])
 
   const handleSubmit: FormEventHandler = (e) => {
@@ -67,7 +63,7 @@ const SignUp = () => {
         <p className={styles.inputMessage}>
           {password.length < 8 && 'Please enter at least 8 characters of password.'}
         </p>
-        <button type='submit' disabled={isDisabled} className={styles.submitButton}>
+        <button type='submit' disabled={!isValidInfo} className={styles.submitButton}>
           Create account
         </button>
       </form>
