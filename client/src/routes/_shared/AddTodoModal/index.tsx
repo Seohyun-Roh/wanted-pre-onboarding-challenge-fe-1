@@ -2,7 +2,8 @@ import { Dispatch, SetStateAction, useState, FormEventHandler } from 'react'
 import axios from 'axios'
 
 import { SERVER_URL } from 'constants/todo'
-import { ITodo } from 'types/todo'
+
+import useTodoStore from 'states/store'
 
 import { Modal } from 'components'
 import styles from './addTodoModal.module.scss'
@@ -10,10 +11,10 @@ import styles from './addTodoModal.module.scss'
 interface Props {
   isModalOpen: boolean
   setIsModalOpen: Dispatch<SetStateAction<boolean>>
-  setTodos: Dispatch<SetStateAction<ITodo[]>>
 }
 
-const AddTodoModal = ({ isModalOpen, setIsModalOpen, setTodos }: Props) => {
+const AddTodoModal = ({ isModalOpen, setIsModalOpen }: Props) => {
+  const { setTodos } = useTodoStore()
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
 
@@ -34,7 +35,7 @@ const AddTodoModal = ({ isModalOpen, setIsModalOpen, setTodos }: Props) => {
         }
       )
       .then(({ data: { data } }) => {
-        setTodos((prev) => [...prev, data])
+        setTodos(data)
       })
       .then(() => setIsModalOpen(false))
   }
