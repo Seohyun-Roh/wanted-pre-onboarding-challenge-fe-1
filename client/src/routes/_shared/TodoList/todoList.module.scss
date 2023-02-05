@@ -1,0 +1,80 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/mixins/flexbox';
+
+.todoContainer {
+  @include flexbox.flexbox(start, center);
+  width: 100%;
+  overflow: scroll;
+
+  .todoList {
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+    transition: width 300ms;
+
+    .todoItem {
+      @include flexbox.flexbox(between, center);
+      width: 100%;
+      height: 75px;
+      padding: 0 15px;
+      background-color: rgba(colors.$GRAYE, 0.3);
+      border-radius: 6px;
+
+      + .todoItem {
+        margin-top: 10px;
+      }
+
+      .todoInfo {
+        width: 90%;
+        max-width: 650px;
+        height: 100%;
+        text-align: left;
+
+        .title,
+        .content {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        .title {
+          font-size: 20px;
+          font-weight: 500;
+        }
+
+        .content {
+          font-size: 16px;
+        }
+      }
+    }
+
+    &.isTodoDetailOpen {
+      .todoInfo {
+        width: 100%;
+      }
+
+      .buttonWrapper {
+        display: none;
+      }
+    }
+  }
+
+  .buttonWrapper {
+    width: 10%;
+    max-width: 60px;
+    text-align: center;
+  }
+}
+
+.addTodoButton {
+  padding: 10px 15px;
+  margin-top: 20px;
+  font-size: 18px;
+  background-color: colors.$BLUE;
+  border-radius: 6px;
+  transition: background-color 300ms;
+
+  &:hover {
+    background-color: rgba(colors.$BLUE, 0.8);
+  }
+}

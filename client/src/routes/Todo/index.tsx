@@ -1,18 +1,19 @@
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { SERVER_URL } from 'constants/todo'
-import { ITodo } from 'types/todo'
+import useTodoStore from 'states/store'
 
-import AddTodoModal from './AddTodoModal'
+import TodoList from 'routes/_shared/TodoList'
 import styles from './todo.module.scss'
+import AddTodo from 'routes/_shared/AddTodo'
 
 const Todo = () => {
   const navigate = useNavigate()
 
-  const [todos, setTodos] = useState<ITodo[]>([])
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const { setTodos } = useTodoStore()
+  const [isTodoDetailOpen, setIsTodoDetailOpen] = useState(false)
 
   useEffect(() => {
     if (!localStorage.getItem('token')) {
@@ -22,28 +23,17 @@ const Todo = () => {
     axios
       .get(`${SERVER_URL}/todos`, {
         headers: {
-          Authorization: localStorage.getItem('token'),
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
       })
       .then(({ data: { data } }) => setTodos(data))
-  }, [navigate])
+  }, [navigate, setTodos])
 
   return (
     <main className={styles.pageContainer}>
       <h1>TODO</h1>
-      <ul className={styles.todoContainer}>
-        {todos.length > 0 &&
-          todos.map((todo: ITodo) => (
-            <li key={todo.id}>
-              <p>{todo.title}</p>
-              <p>{todo.content}</p>
-            </li>
-          ))}
-      </ul>
-      <button type='button' onClick={() => setIsModalOpen(true)}>
-        + ADD TODO
-      </button>
-      {isModalOpen && <AddTodoModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} setTodos={setTodos} />}
+      <TodoList isTodoDetailOpen={isTodoDetailOpen} setIsTodoDetailOpen={setIsTodoDetailOpen} />
+      <AddTodo />
     </main>
   )
 }
